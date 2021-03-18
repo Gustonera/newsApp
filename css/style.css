@@ -1,0 +1,196 @@
+/*GENERAL*/
+
+.bg-inverse {
+	background-color: #252525;
+}
+
+a, a:hover {
+  color: #252525;
+}
+
+.content {
+  margin-left: 100px;
+}
+
+/*NAVBAR*/
+
+nav a {
+  margin-left: 20px;
+}
+
+/*LOGO*/
+
+#logo {
+  margin-bottom: 5px;
+}
+
+.logo-text {
+  margin-left: 15px;
+}
+
+/*Content Placeholder*/
+
+.content {
+	text-align: center;
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+h1 {
+	margin-bottom: 50px;
+}
+
+#instructions {
+	line-height: 1.5;
+}
+
+#disclaimer {
+	padding-top: 25px;
+	text-align: left;
+}
+
+/*SIDEBAR*/
+
+.sidebar {
+	height: 95%;
+	float: left;
+	position: absolute;
+	border-right: 1px solid #e7e7e7;
+	margin-right: 20px;
+	min-width: 86px;
+	max-width: 86px;
+  z-index: 200;
+ }    
+
+.sidebar .section {
+	background-color: #fbfbfb;
+	border-bottom: solid 1px #e7e7e7;
+	padding: 20px;
+	height: 76px;
+}
+
+.sidebar .fa {
+  font-size: 2em;
+  position: absolute;
+  left: 29.4px;
+}
+
+/*SIDEBAR COLOR PALETTE*/
+
+
+
+.fa-flask {
+	color: #14b9d6;
+}
+
+.fa-futbol-o {
+	color: #e76049;
+}
+
+.fa-globe {
+	color: #2eb398;
+}
+
+.fa-code {
+	color: #90899c;
+}
+
+.fa-briefcase {
+	color: #5692b1;
+}
+
+.fa-university {
+	color: #f9b704;
+}
+
+.fa-music {
+	color: #dd1787;
+}
+
+.fa-plus {
+	color: #e76049;
+}
+
+.fa-gamepad {
+	color: #252525;
+}
+
+/*SIDEBAR INTERACTIVITY (JS STYLES)*/
+
+.title-text {
+  position: static;
+	display: none;
+	color: #fbfbfb;
+	font-size: 1.4em;
+	font-weight: bold;
+	margin-bottom: 0;
+  margin-left: 55px;
+}
+
+.hovered {
+	margin-right: -100px;
+	padding-right: 180px;
+	text-align: left;
+  transition: all .3s ease;
+}
+
+/*CARDS COLOR PALETTE*/
+
+.card {
+  border-bottom: solid 4px;
+  
+}
+
+
+.card-number-1 {
+  border-bottom-color: #2eb398;
+}
+
+.card-number-2 {
+  border-bottom-color: #e76049;
+}
+
+.card-number-3 {
+  border-bottom-color: #14b9d6;
+}
+
+.card-number-4 {
+  border-bottom-color: #252525;
+}
+
+.card-number-5 {
+  border-bottom-color: #5692b1;
+}
+
+.card-number-6 {
+  border-bottom-color: #dd1787;
+}
+
+/*Searching.. TEXT*/
+
+#placeholder-text {
+  color: #e76049;
+  position: absolute;
+  display:block;
+  margin-top: 50px;
+  margin-left: 2%;
+}
+/*Media Queries*/
+
+@media (min-width: 1200px) {
+
+  	.content {
+  		margin: 30px;
+  		margin-left: 100px;
+  		margin-right: 200px;
+  	}
+
+  	.card-block p {
+  		font-size: 1.3em;
+  	}
+
+  	.card-block h4 {
+  		font-size: 1.6em;
+  	}
+
+}
