@@ -113,6 +113,12 @@ $('#filter_holder').on('click','#searchbtn',function(){
     content += '<div class="card-block">';
     content += '<h4 class="card-title">' + article.title + '</h4>';
     content += '<p class="card-text">' + article.description + '</p>';
+    content += '<div class="social">'+
+    '<a href="https://api.whatsapp.com/send?text=' + encodeURI(article.url) + '" target="_blank" id="share-wa" class="sharer button"><i class="fa fa-3x fa-whatsapp"></i></a>'+
+    '<a href="https://www.facebook.com/sharer.php?u='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>'+
+    '<a href="https://telegram.me/share/url?url='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-telegram"></i></a>'+
+    '<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
+     '</div>';
     content += '</div></div>';
     content += '</a>';
 
@@ -153,6 +159,12 @@ $(window).scroll(function() {
 		    content += '<div class="card-block">';
 		    content += '<h4 class="card-title">' + article.title + '</h4>';
 		    content += '<p class="card-text">' + article.description + '</p>';
+		    content += '<div class="social">'+
+			'<a href="https://api.whatsapp.com/send?text=' + encodeURI(article.url) + '" target="_blank" id="share-wa" class="sharer button"><i class="fa fa-3x fa-whatsapp"></i></a>'+
+			'<a href="https://www.facebook.com/sharer.php?u='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>'+
+			'<a href="https://telegram.me/share/url?url='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-telegram"></i></a>'+
+			'<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
+			'</div>';
 		    content += '</div></div>';
 		    content += '</a>';
 
@@ -171,6 +183,106 @@ $(window).scroll(function() {
 	    }
 	});
 
+
+});
+/*without clicking button (on page load)*/
+
+$(document).ready(function(){
+append="q=None&";
+// initial page
+	pageSize = 20;
+	var urlinitial ="https://newsapi.org/v2/everything?";
+	url = urlinitial+append+"pageSize="+pageSize+"&apiKey=35ceb3b0db8c41388c640eee192df2a8"; //Final url for AJAX request
+	// url = url+append+"apiKey=b6fc115f7c46456ab9006a9101183548"; //Final url for AJAX request
+
+	
+	/*AJAX REQUEST & DOM PARSING*/
+
+	$.getJSON(url, function(data){ //callback
+    var content = '<div class="card-columns">';
+
+
+    
+    $.each(data.articles , function(i,article) { 
+    content += '<a target="_blank" href="' + article.url + '">';
+    content += '<div class="card card-number-' + (i+1) + '">'; 
+      if (article.urlToImage === null) {
+        content += '<img class="card-img-top img-fluid" src="img/default.png" alt="Card image cap">';
+      } else {
+        content += '<img class="card-img-top img-fluid" src="' + article.urlToImage + '" alt="Card image cap">';
+      }
+    content += '<div class="card-block">';
+    content += '<h4 class="card-title">' + article.title + '</h4>';
+    content += '<p class="card-text">' + article.description + '</p>';
+    content += '<div class="social">'+
+    '<a href="https://api.whatsapp.com/send?text=' + encodeURI(article.url) + '" target="_blank" id="share-wa" class="sharer button"><i class="fa fa-3x fa-whatsapp"></i></a>'+
+    '<a href="https://www.facebook.com/sharer.php?u='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>'+
+    '<a href="https://telegram.me/share/url?url='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-telegram"></i></a>'+
+    '<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
+     '</div>';
+    content += '</div></div>';
+    content += '</a>';
+
+    
+      
+    }); //end each
+
+
+    
+    content += '</div>';
+    $(".content").empty(); //empty the "Searching.." Placeholder
+    $(".content").append(content); //append the dom parsed json to content
+    
+  }); //finish callback
+
+$(window).scroll(function() {
+
+	    if($(window).scrollTop() + $(window).height() >= $(document).height()-2) {
+			// initial page
+			pageSize = pageSize+20;
+			var urlinitial ="https://newsapi.org/v2/everything?";
+			url = urlinitial+append+"pageSize="+pageSize+"&apiKey=35ceb3b0db8c41388c640eee192df2a8";
+			      /*AJAX REQUEST & DOM PARSING*/
+
+			$.getJSON(url, function(data){ //callback
+		    var content = '<div class="card-columns">';
+
+
+		    
+		    $.each(data.articles , function(i,article) { 
+		    content += '<a target="_blank" href="' + article.url + '">';
+		    content += '<div class="card card-number-' + (i+1) + '">'; 
+		      if (article.urlToImage === null) {
+		        content += '<img class="card-img-top img-fluid" src="img/default.png" alt="Card image cap">';
+		      } else {
+		        content += '<img class="card-img-top img-fluid" src="' + article.urlToImage + '" alt="Card image cap">';
+		      }
+		    content += '<div class="card-block">';
+		    content += '<h4 class="card-title">' + article.title + '</h4>';
+		    content += '<p class="card-text">' + article.description + '</p>';
+		    content += '<div class="social">'+
+			'<a href="https://api.whatsapp.com/send?text=' + encodeURI(article.url) + '" target="_blank" id="share-wa" class="sharer button"><i class="fa fa-3x fa-whatsapp"></i></a>'+
+			'<a href="https://www.facebook.com/sharer.php?u='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>'+
+			'<a href="https://telegram.me/share/url?url='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-telegram"></i></a>'+
+			'<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
+			'</div>';
+		    content += '</div></div>';
+		    content += '</a>';
+
+		    
+		      
+		    }); //end each
+
+
+		    
+		    content += '</div>';
+		    $(".content").empty(); //empty the "Searching.." Placeholder
+		    $(".content").append(content); //append the dom parsed json to content
+		    
+		  }); //finish callback  
+
+	    }
+	});
 
 });
 
