@@ -118,6 +118,7 @@ $('#filter_holder').on('click','#searchbtn',function(){
     '<a href="https://www.facebook.com/sharer.php?u='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>'+
     '<a href="https://telegram.me/share/url?url='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-telegram"></i></a>'+
     '<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
+    '<div style="float:right;"><button class="ratencomment btn btn-primary" data-url='+article.url+'" data-toggle="modal" data-target="#ratings">Rate And Comment</button></div>'+
      '</div>';
     content += '</div></div>';
     content += '</a>';
@@ -163,8 +164,9 @@ $(window).scroll(function() {
 			'<a href="https://api.whatsapp.com/send?text=' + encodeURI(article.url) + '" target="_blank" id="share-wa" class="sharer button"><i class="fa fa-3x fa-whatsapp"></i></a>'+
 			'<a href="https://www.facebook.com/sharer.php?u='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>'+
 			'<a href="https://telegram.me/share/url?url='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-telegram"></i></a>'+
-			'<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
-			'</div>';
+    		'<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
+    		'<div style="float:right;"><button class="ratencomment btn btn-primary" data-url='+article.url+'" data-toggle="modal" data-target="#ratings">Rate And Comment</button></div>'+
+     		'</div>';
 		    content += '</div></div>';
 		    content += '</a>';
 
@@ -219,6 +221,7 @@ append="q=None&";
     '<a href="https://www.facebook.com/sharer.php?u='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>'+
     '<a href="https://telegram.me/share/url?url='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-telegram"></i></a>'+
     '<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
+    '<div style="float:right;"><button class="ratencomment btn btn-primary" data-url='+article.url+'" data-toggle="modal" data-target="#ratings">Rate And Comment</button></div>'+
      '</div>';
     content += '</div></div>';
     content += '</a>';
@@ -264,8 +267,9 @@ $(window).scroll(function() {
 			'<a href="https://api.whatsapp.com/send?text=' + encodeURI(article.url) + '" target="_blank" id="share-wa" class="sharer button"><i class="fa fa-3x fa-whatsapp"></i></a>'+
 			'<a href="https://www.facebook.com/sharer.php?u='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>'+
 			'<a href="https://telegram.me/share/url?url='+article.url+'" id="share-li" class="sharer button" target="_blank"><i class="fa fa-3x fa-telegram"></i></a>'+
-			'<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
-			'</div>';
+    		'<a href="http://www.twitter.com/share?url='+article.url+'" id="share-gp" target="_blank" class="sharer button"><i class="fa fa-3x fa-twitter-square"></i></a>'+
+    		'<div style="float:right;"><button class="ratencomment btn btn-primary" data-url='+article.url+'" data-toggle="modal" data-target="#ratings">Rate And Comment</button></div>'+
+ 			'</div>';
 		    content += '</div></div>';
 		    content += '</a>';
 
@@ -283,6 +287,29 @@ $(window).scroll(function() {
 
 	    }
 	});
+
+//ajax request for the comments and ratings
+$('.content').on('click','.ratencomment',function(){
+          var url = $(this).data('url');
+          $('.holder').empty();
+          //send to ratings.php
+          var dataTosend = 'url='+url;
+          $.ajax({
+            url:"ratings.php",
+            method:"POST", 
+            data:dataTosend,
+            async:true,
+            dataType:"text",
+            success:function(data){
+              $('.holder').html(data); 
+              $('.fade').removeClass('modal-backdrop');              
+            },
+            error:function(jqXHR, exception){
+              alert('failed to communicate with the server');
+            } 
+
+          }); 
+        });
 
 });
 
